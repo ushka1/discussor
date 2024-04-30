@@ -1,14 +1,46 @@
 import express from 'express';
 import { logger } from './config/logger';
+import { setupSwagger } from './config/swagger';
 
 const app = express();
 const port = process.env.PORT;
 
+setupSwagger(app);
+
+/**
+ * @openapi
+ * '/':
+ *   get:
+ *     summary: A simple GET request
+ *     responses:
+ *       200:
+ *        description: OK
+ */
 app.get('/', (_, res) => {
   logger.info('GET /');
   res.send('Hello, TypeScript with Express!');
 });
 
+/**
+ * @openapi
+ * '/posts':
+ *   get:
+ *     summary: A simple GET request to fetch posts
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   title:
+ *                     type: string
+ *                   body:
+ *                     type: string
+ */
 app.get('/posts', (_, res) => {
   logger.info('GET /posts');
   res.json([
