@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "mock-api": "json-server -p 8090 ./db.json"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
@@ -24,6 +25,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
+    "json-server": "^1.0.0-alpha.23",
     "typescript": "^5"
   }
 }
