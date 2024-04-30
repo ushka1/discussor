@@ -1,4 +1,5 @@
 import express from 'express';
+import { setupGracefulShutdown } from './config/gracefulShutdown';
 import { logger } from './config/logger';
 import { setupSwagger } from './config/swagger';
 
@@ -50,6 +51,8 @@ app.get('/posts', (_, res) => {
   ]);
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   logger.info(`Server is running on http://localhost:${port}`);
 });
+
+setupGracefulShutdown(server);
