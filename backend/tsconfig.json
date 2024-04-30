@@ -16,6 +16,9 @@
     }
   },
   "compilerOptions": {
-    // typescript options here
+    "pretty": true, // use pretty error messages
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }
