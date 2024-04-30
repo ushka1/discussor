@@ -1,7 +1,9 @@
 import express from 'express';
 import { setupGracefulShutdown } from './config/gracefulShutdown';
 import { logger } from './config/logger';
+import { connectToMongoDB } from './config/mongodb';
 import { setupSwagger } from './config/swagger';
+import { authRouter } from './routers/authRouter';
 
 const app = express();
 const port = process.env.PORT;
@@ -10,49 +12,26 @@ setupSwagger(app);
 
 /**
  * @openapi
- * '/':
+ * /:
  *   get:
- *     summary: A simple GET request
+ *     summary: Check if the server is up
  *     responses:
  *       200:
- *        description: OK
+ *         description: The server is up
  */
 app.get('/', (_, res) => {
-  logger.info('GET /');
-  res.send('Hello, TypeScript with Express!');
+  res.send('The server is up!');
 });
 
-/**
- * @openapi
- * '/posts':
- *   get:
- *     summary: A simple GET request to fetch posts
- *     responses:
- *       200:
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   title:
- *                     type: string
- *                   body:
- *                     type: string
- */
-app.get('/posts', (_, res) => {
-  logger.info('GET /posts');
-  res.json([
-    { title: 'Post 1', body: 'This is post 1' },
-    { title: 'Post 2', body: 'This is post 2' },
-    { title: 'Post 3', body: 'This is post 3' },
-  ]);
-});
+app.use(authRouter);
 
-const server = app.listen(port, () => {
-  logger.info(`Server is running on http://localhost:${port}`);
-});
+(async () => {
+  await connectToMongoDB();
+  logger.info('Connected to MongoDB');
 
-setupGracefulShutdown(server);
+  const server = app.listen(port);
+  logger.info(`Server running on http://localhost:${port}`);
+
+  setupGracefulShutdown(server);
+  logger.info('Graceful shutdown setup');
+})();
