@@ -9,5 +9,5 @@ export default function FetchButton() {
     console.log(data);
   }
 
-  return <Button onClick={handler}>Fetch posts!</Button>;
+  return <Button onClick={handler}>Fetch posts</Button>;
 }
