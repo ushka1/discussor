@@ -7,5 +7,7 @@ declare namespace NodeJS {
     DB_PASSWORD: string;
     DB_USERNAME: string;
     DB_AUTH_SOURCE: string;
+
+    JWT_SECRET: string;
   }
 }

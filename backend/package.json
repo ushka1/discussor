@@ -16,6 +16,7 @@
   "dependencies": {
     "@typegoose/typegoose": "^12.4.0",
     "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.6",
     "bcrypt": "^5.1.1",
@@ -23,6 +24,7 @@
     "express": "^4.19.2",
     "joi": "^17.13.0",
     "joi-password": "^4.2.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.3.3",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",

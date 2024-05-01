@@ -28,6 +28,13 @@ export const authRouter = Router();
  *     responses:
  *       200:
  *         description: New user registered successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
  *       400:
  *         description: Invalid username, email, or password
  *         content:
@@ -67,6 +74,13 @@ authRouter.post(
  *     responses:
  *       200:
  *         description: User logged in successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
  *       401:
  *         description: Invalid email or password
  *       500:

@@ -1,12 +1,23 @@
-import winston from 'winston';
+import { createLogger, format, transports } from 'winston';
 
-const customFormat = winston.format.printf(({ level, message }) => {
+const customFormat = format.printf(({ level, message, stack }) => {
+  if (stack) {
+    return `${level}: ${message} - ${stack}`;
+  }
+
   return `${level}: ${message}`;
 });
 
-export const logger = winston.createLogger({
+export const logger = createLogger({
+  format: format.combine(
+    format.errors({ stack: true }),
+    format.colorize(),
+    format.prettyPrint(),
+  ),
   transports: [
-    new winston.transports.Console({ format: customFormat }),
-    new winston.transports.File({ filename: 'combined.log' }),
+    new transports.Console({
+      format: customFormat,
+    }),
+    new transports.File({ filename: 'combined.log' }),
   ],
 });

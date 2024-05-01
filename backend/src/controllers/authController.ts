@@ -1,4 +1,6 @@
+import { logger } from '@/config/logger';
 import { UserModel } from '@/models/User';
+import { generateAccessToken } from '@/security/jwt';
 import { LoginBody, RegisterBody } from '@/validation/authValidation';
 import bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
@@ -13,14 +15,17 @@ export async function registerHandler(req: Request, res: Response) {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    await UserModel.create({
+    const user = await UserModel.create({
       username,
       email,
       password: hashedPassword,
     });
 
-    res.status(200).send();
+    const token = generateAccessToken(user.id);
+    res.status(200).json({ token });
   } catch (err) {
+    logger.error(err);
+
     res.status(500).json({ message: 'Internal Server Error' });
   }
 }
@@ -39,8 +44,10 @@ export async function loginHandler(req: Request, res: Response) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    res.status(200).send();
+    const token = generateAccessToken(user.id);
+    res.status(200).json({ token });
   } catch (err) {
+    logger.error(err);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 }
