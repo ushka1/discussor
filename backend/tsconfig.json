@@ -18,6 +18,7 @@
   "compilerOptions": {
     "pretty": true, // use pretty error messages
     "experimentalDecorators": true, // required by Typegoose
+    "emitDecoratorMetadata": true, // required by Typegoose
     "paths": {
       "@/*": ["./src/*"]
     }

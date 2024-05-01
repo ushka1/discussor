@@ -5,8 +5,8 @@ class User {
 
   @prop({
     required: true,
-    minlength: 1,
-    maxlength: 64,
+    minlength: 3,
+    maxlength: 30,
   })
   public username!: string;
 
