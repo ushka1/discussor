@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname, useRouter } from '@/i18n/navigation';
+import { usePathname, useRouter } from '@discussor/navigation';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -14,7 +14,10 @@ type Props = {
   children: ReactNode;
 };
 
-export default function LocaleSwitcherSelect({ label, children }: Props) {
+export default function LocaleSwitcherSelect({
+  label,
+  children,
+}: Readonly<Props>) {
   const router = useRouter();
   const pathname = usePathname();
   const params = useParams();

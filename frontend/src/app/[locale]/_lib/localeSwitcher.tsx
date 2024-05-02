@@ -1,4 +1,4 @@
-import { locales } from '@/i18n/config';
+import { locales } from '@/i18n/i18nConfig';
 import { MenuItem } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import LocaleSwitcherSelect from './localeSwitcherSelect';

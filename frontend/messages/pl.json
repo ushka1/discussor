@@ -1,6 +1,18 @@
 {
-  "Index": {
+  "Home": {
     "title": "Witaj świecie!"
+  },
+  "Auth": {
+    "loginTitle": "Logowanie",
+    "loginButton": "Zaloguj się",
+    "loginSwitch": "Rejestracja",
+    "registerTitle": "Rejestracja",
+    "registerButton": "Zarejestruj się",
+    "registerSwitch": "Logowanie",
+    "username": "Nazwa użytkownika",
+    "email": "Adres email",
+    "password": "Hasło",
+    "repeatPassword": "Powtórz hasło"
   },
   "LocaleSwitcher": {
     "label": "Język",

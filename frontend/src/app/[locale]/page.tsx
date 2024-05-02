@@ -4,8 +4,8 @@ import { getPostsData } from './_lib/actions';
 import FetchButton from './_lib/fetchButton';
 import LocaleSwitcher from './_lib/localeSwitcher';
 
-export default async function Home() {
-  const t = await getTranslations('Index');
+export default async function HomePage() {
+  const t = await getTranslations('Home');
   const data = await getPostsData();
 
   return (

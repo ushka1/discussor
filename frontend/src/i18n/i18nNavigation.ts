@@ -1,5 +1,5 @@
 import { createLocalizedPathnamesNavigation } from 'next-intl/navigation';
-import { localePrefix, locales, pathnames } from './config';
+import { localePrefix, locales, pathnames } from './i18nConfig';
 
 const localizedPathnamesNavigation = createLocalizedPathnamesNavigation({
   locales,

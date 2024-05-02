@@ -1,6 +1,18 @@
 {
-  "Index": {
+  "Home": {
     "title": "Hello world!"
+  },
+  "Auth": {
+    "loginTitle": "Login form",
+    "loginButton": "Login",
+    "loginSwitch": "Switch to register",
+    "registerTitle": "Register form",
+    "registerButton": "Register",
+    "registerSwitch": "Switch to login",
+    "username": "Username",
+    "email": "Email address",
+    "password": "Password",
+    "repeatPassword": "Repeat password"
   },
   "LocaleSwitcher": {
     "label": "Language",
