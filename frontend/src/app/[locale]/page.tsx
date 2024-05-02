@@ -1,7 +1,13 @@
-import { Box, List, ListItem, ListItemText, Typography } from '@mui/material';
+import {
+  Box,
+  Link,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+} from '@mui/material';
 import { getTranslations } from 'next-intl/server';
 import { getPostsData, getServerStatus } from './_lib/actions';
-import FetchButton from './_lib/fetchButton';
 import LocaleSwitcher from './_lib/localeSwitcher';
 
 export default async function HomePage() {
@@ -27,7 +33,9 @@ export default async function HomePage() {
           </ListItem>
         ))}
       </List>
-      <FetchButton />
+      <Box>
+        <Link href='/profile'>Profile</Link>
+      </Box>
     </main>
   );
 }

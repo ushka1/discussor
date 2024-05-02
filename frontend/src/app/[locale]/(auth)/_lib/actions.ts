@@ -1,7 +1,7 @@
 'use server';
 
 import { redirect } from '@/localization/localizedNavigation';
-import { createSession } from '@/security/sessions';
+import { createSession, deleteSession } from '@/security/sessions';
 import { apiClient } from '@discussor/axios';
 import { LoginFormSchema, RegisterFormSchema } from './definitions';
 
@@ -47,4 +47,10 @@ export async function register(state: unknown, formData: FormData) {
   if (token) {
     createSession(token);
   }
+}
+
+export async function logout() {
+  deleteSession();
+  // @ts-ignore
+  redirect('/login');
 }

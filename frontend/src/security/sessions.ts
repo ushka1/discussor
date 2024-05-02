@@ -14,6 +14,26 @@ export function createSession(token: string) {
   });
 }
 
+export function verifySession() {
+  const token = cookies().get('session');
+  if (!token) {
+    return false;
+  }
+
+  try {
+    const { exp } = jwtDecode(token.value);
+    if (exp && exp * 1000 < Date.now()) {
+      deleteSession();
+      return false;
+    }
+
+    return true;
+  } catch {
+    deleteSession();
+    return false;
+  }
+}
+
 export function deleteSession() {
   cookies().delete('session');
 }

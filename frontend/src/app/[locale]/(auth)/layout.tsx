@@ -1,3 +1,5 @@
+import { verifySession } from '@/security/sessions';
+import { redirect } from '@discussor/navigation';
 import { Box, Paper } from '@mui/material';
 import pick from 'lodash/pick';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
@@ -7,8 +9,13 @@ export default function AuthLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const messages = useMessages();
+  const verified = verifySession();
+  if (verified) {
+    // @ts-ignore
+    redirect('/profile');
+  }
 
+  const messages = useMessages();
   return (
     <Box component={'main'}>
       <Paper
