@@ -1,6 +1,6 @@
 'use client';
 
-import { Link as LocalizedNextLink } from '@discussor/navigation';
+import { Link as LocalizedNextLink } from '@/localization/localizedNavigation';
 import { createTheme } from '@mui/material/styles';
 import { Roboto } from 'next/font/google';
 import { forwardRef } from 'react';

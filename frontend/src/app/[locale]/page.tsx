@@ -1,12 +1,13 @@
 import { Box, List, ListItem, ListItemText, Typography } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
-import { getPostsData } from './_lib/actions';
+import { getPostsData, getServerStatus } from './_lib/actions';
 import FetchButton from './_lib/fetchButton';
 import LocaleSwitcher from './_lib/localeSwitcher';
 
 export default async function HomePage() {
   const t = await getTranslations('Home');
-  const data = await getPostsData();
+  const posts = await getPostsData();
+  const status = await getServerStatus();
 
   return (
     <main>
@@ -14,10 +15,13 @@ export default async function HomePage() {
         <Typography variant='h2' sx={{ mr: 4 }}>
           {t('title')}
         </Typography>
+        <Typography variant='h6' sx={{ mr: 4 }}>
+          {status}
+        </Typography>
         <LocaleSwitcher />
       </Box>
       <List>
-        {data.map((post: any) => (
+        {posts.map((post: any) => (
           <ListItem key={post.title}>
             <ListItemText>{post.title}</ListItemText>
           </ListItem>

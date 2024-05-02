@@ -3,7 +3,7 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useFormState } from 'react-dom';
-import { register } from '../actions';
+import { register } from '../_lib/actions';
 
 export default function RegisterPage() {
   const t = useTranslations('Auth');

@@ -1,9 +1,9 @@
 'use server';
 
-import { axios } from '@discussor/axios';
-import { redirect } from '@discussor/navigation';
+import { redirect } from '@/localization/localizedNavigation';
+import { createSession } from '@/security/sessions';
+import { apiClient } from '@discussor/axios';
 import { LoginFormSchema, RegisterFormSchema } from './definitions';
-import { createSession } from './session';
 
 export async function login(state: unknown, formData: FormData) {
   const validatedFields = LoginFormSchema.safeParse({
@@ -17,7 +17,7 @@ export async function login(state: unknown, formData: FormData) {
     };
   }
 
-  const response = await axios.post('/auth/login', validatedFields.data);
+  const response = await apiClient.post('/auth/login', validatedFields.data);
   const token = response.data?.token;
 
   if (token) {
@@ -41,7 +41,7 @@ export async function register(state: unknown, formData: FormData) {
     };
   }
 
-  const response = await axios.post('/auth/register', validatedFields.data);
+  const response = await apiClient.post('/auth/register', validatedFields.data);
   const token = response.data?.token;
 
   if (token) {

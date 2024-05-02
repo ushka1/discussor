@@ -1,10 +1,9 @@
 'use client';
 
-import '@/config/auth';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useFormState } from 'react-dom';
-import { login } from '../actions';
+import { login } from '../_lib/actions';
 
 export default function LoginPage() {
   const t = useTranslations('Auth');

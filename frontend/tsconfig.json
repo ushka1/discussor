@@ -23,7 +23,7 @@
       "@public/*": ["./public/*"],
 
       "@discussor/axios": ["./src/config/axios.ts"],
-      "@discussor/navigation": ["./src/i18n/i18nNavigation.ts"]
+      "@discussor/navigation": ["./src/localization/localizedNavigation.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

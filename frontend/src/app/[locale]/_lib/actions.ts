@@ -1,8 +1,13 @@
 'use server';
 
-import { axios } from '@discussor/axios';
+import { apiClient } from '@discussor/axios';
+
+export async function getServerStatus() {
+  const { data } = await apiClient.get('/');
+  return data;
+}
 
 export async function getPostsData() {
-  const { data } = await axios.get('/posts');
+  const { data } = await apiClient.get('/posts');
   return data;
 }

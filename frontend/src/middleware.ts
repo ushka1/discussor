@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { authMiddleware } from './config/auth';
-import { intlMiddleware } from './i18n/i18nMiddleware';
+import { intlMiddleware } from './localization/intlMiddleware';
+import { authMiddleware } from './security/authMiddleware';
 
 export default function middleware(req: NextRequest) {
   return authMiddleware(
