@@ -12,6 +12,8 @@ class User {
 
   @prop({
     required: true,
+    unique: true,
+    lowercase: true,
   })
   public email!: string;
 

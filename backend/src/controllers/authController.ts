@@ -6,6 +6,8 @@ import bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 
 export async function registerHandler(req: Request, res: Response) {
+  logger.info('register handler');
+
   try {
     const { username, email, password } = req.body as RegisterBody;
 
@@ -21,7 +23,7 @@ export async function registerHandler(req: Request, res: Response) {
       password: hashedPassword,
     });
 
-    const token = generateAccessToken(user.id);
+    const token = await generateAccessToken({ userId: user.id });
     res.status(200).json({ token });
   } catch (err) {
     logger.error(err);
@@ -31,6 +33,8 @@ export async function registerHandler(req: Request, res: Response) {
 }
 
 export async function loginHandler(req: Request, res: Response) {
+  logger.info('login handler');
+
   try {
     const { email, password } = req.body as LoginBody;
 
@@ -44,7 +48,7 @@ export async function loginHandler(req: Request, res: Response) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    const token = generateAccessToken(user.id);
+    const token = await generateAccessToken({ userId: user.id });
     res.status(200).json({ token });
   } catch (err) {
     logger.error(err);

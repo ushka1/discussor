@@ -11,3 +11,9 @@ declare namespace NodeJS {
     JWT_SECRET: string;
   }
 }
+
+declare namespace Express {
+  export interface Request {
+    user?: import('./models/User').UserDocument;
+  }
+}

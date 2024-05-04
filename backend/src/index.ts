@@ -4,6 +4,7 @@ import { logger } from './config/logger';
 import { connectToMongoDB } from './config/mongodb';
 import { setupSwagger } from './config/swagger';
 import { authRouter } from './routers/authRouter';
+import { profileRouter } from './routers/profileRouter';
 
 const app = express();
 const port = process.env.PORT;
@@ -21,11 +22,13 @@ setupSwagger(app);
  *       200:
  *         description: The server is up
  */
-app.get('/', (_, res) => {
+app.get('/', (req, res) => {
+  console.log(req.headers);
   res.send('The server is up!');
 });
 
 app.use(authRouter);
+app.use(profileRouter);
 
 (async () => {
   await connectToMongoDB();
