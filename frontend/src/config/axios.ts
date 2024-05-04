@@ -17,6 +17,7 @@ apiClient.interceptors.request.use(
     return config;
   },
   (error) => {
+    console.log('Axios interceptor error.');
     return Promise.reject(error);
   },
 );

@@ -5,7 +5,7 @@ import { createSession, deleteSession } from '@/security/sessions';
 import { apiClient } from '@discussor/axios';
 import { LoginFormSchema, RegisterFormSchema } from './definitions';
 
-export async function login(state: unknown, formData: FormData) {
+export async function login(previousState: unknown, formData: FormData) {
   const validatedFields = LoginFormSchema.safeParse({
     email: formData.get('email'),
     password: formData.get('password'),
@@ -27,7 +27,7 @@ export async function login(state: unknown, formData: FormData) {
   }
 }
 
-export async function register(state: unknown, formData: FormData) {
+export async function register(previousState: unknown, formData: FormData) {
   const validatedFields = RegisterFormSchema.safeParse({
     username: formData.get('username'),
     email: formData.get('email'),

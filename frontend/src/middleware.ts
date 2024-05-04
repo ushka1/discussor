@@ -5,13 +5,15 @@ import { authMiddleware } from './security/authMiddleware';
 export default function middleware(req: NextRequest) {
   return authMiddleware(
     req,
-    () => intlMiddleware(req),
-    () => NextResponse.redirect(new URL('/login', req.nextUrl)),
+    (r) => intlMiddleware(r),
+    (r) => NextResponse.redirect(new URL('/login', r.nextUrl)),
   );
 }
 
 export const config = {
-  // Match only internationalized pathnames.
+  /*
+   * Match only internationalized pathnames.
+   */
   // matcher: ['/', '/(en|pl)/:path*'],
 
   matcher: [
@@ -24,6 +26,10 @@ export const config = {
      * - robots.txt (robots file)
      * - .png, .jpg, .svg (image files)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|robots.txt|.*\\.png$|.*\\.jpg$|.*\\.svg$).*)',
+    {
+      source:
+        '/((?!api|_next/static|_next/image|favicon.ico|robots.txt|.*\\.png$|.*\\.jpg$|.*\\.svg$).*)',
+      // missing: [{ type: 'header', key: 'next-action' }],
+    },
   ],
 };

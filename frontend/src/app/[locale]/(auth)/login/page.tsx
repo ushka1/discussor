@@ -1,13 +1,27 @@
 'use client';
 
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import {
+  Box,
+  Button,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 import { useFormState } from 'react-dom';
 import { login } from '../_lib/actions';
 
 export default function LoginPage() {
   const t = useTranslations('Auth');
   const [state, action] = useFormState(login, undefined);
+  const [showPassword, setShowPassword] = useState(false);
+
+  function togglePasswordVisibility() {
+    setShowPassword((value) => !value);
+  }
 
   return (
     <Box
@@ -30,10 +44,23 @@ export default function LoginPage() {
       />
       <TextField
         name='password'
-        type='password'
+        type={showPassword ? 'text' : 'password'}
         required
         label={t('password')}
         sx={{ mt: 2 }}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position='end'>
+              <IconButton
+                aria-label='toggle password visibility'
+                onClick={togglePasswordVisibility}
+                edge='end'
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
       />
       <Button type='submit' variant='contained' sx={{ mt: 4 }}>
         {t('loginButton')}

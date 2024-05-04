@@ -1,13 +1,33 @@
 'use client';
 
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import {
+  Box,
+  Button,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 import { useFormState } from 'react-dom';
 import { register } from '../_lib/actions';
 
 export default function RegisterPage() {
   const t = useTranslations('Auth');
   const [state, action] = useFormState(register, undefined);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+
+  function togglePasswordVisibility() {
+    setShowPassword((value) => !value);
+  }
+
+  function toggleRepeatPasswordVisibility() {
+    setShowRepeatPassword((value) => !value);
+  }
 
   return (
     <Box
@@ -40,21 +60,47 @@ export default function RegisterPage() {
       />
       <TextField
         name='password'
-        type='password'
+        type={showPassword ? 'text' : 'password'}
         required
         label={t('password')}
         sx={{ mt: 2 }}
         error={!!state?.errors?.password}
         helperText={state?.errors?.password?.[0]}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position='end'>
+              <IconButton
+                aria-label='toggle password visibility'
+                onClick={togglePasswordVisibility}
+                edge='end'
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
       />
       <TextField
         name='repeatPassword'
-        type='password'
+        type={showRepeatPassword ? 'text' : 'password'}
         required
         label={t('repeatPassword')}
         sx={{ mt: 2 }}
         error={!!state?.errors?.repeatPassword}
         helperText={state?.errors?.repeatPassword}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position='end'>
+              <IconButton
+                aria-label='toggle password visibility'
+                onClick={toggleRepeatPasswordVisibility}
+                edge='end'
+              >
+                {showRepeatPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
       />
       <Button type='submit' variant='contained' sx={{ mt: 4 }}>
         {t('registerButton')}
