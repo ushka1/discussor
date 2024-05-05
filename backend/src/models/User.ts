@@ -1,6 +1,12 @@
-import { DocumentType, getModelForClass, prop } from '@typegoose/typegoose';
+import {
+  DocumentType,
+  Ref,
+  getModelForClass,
+  prop,
+} from '@typegoose/typegoose';
+import { Discussion } from './Discussion';
 
-class User {
+export class User {
   // Data
 
   @prop({
@@ -27,15 +33,18 @@ class User {
   @prop()
   public socketId?: string;
 
-  @prop()
-  public discussionId?: string;
+  @prop({
+    // ref: () => Discussion,
+    ref: 'Discussion',
+  })
+  public discussion?: Ref<Discussion>;
 
   public get isOnline() {
     return !!this.socketId;
   }
 
   public get inDiscussion() {
-    return !!this.discussionId;
+    return !!this.discussion;
   }
 }
 
