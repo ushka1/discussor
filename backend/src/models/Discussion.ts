@@ -45,5 +45,8 @@ export class Discussion {
 
 export type DiscussionDocument = DocumentType<Discussion>;
 export const DiscussionModel = getModelForClass(Discussion, {
-  schemaOptions: { autoCreate: true, timestamps: true },
+  schemaOptions: {
+    autoCreate: true,
+    timestamps: true,
+  },
 });

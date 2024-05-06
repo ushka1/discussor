@@ -50,5 +50,8 @@ export class User {
 
 export type UserDocument = DocumentType<User>;
 export const UserModel = getModelForClass(User, {
-  schemaOptions: { autoCreate: true, timestamps: true },
+  schemaOptions: {
+    autoCreate: true,
+    timestamps: true,
+  },
 });
