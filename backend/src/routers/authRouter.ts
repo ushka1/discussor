@@ -10,6 +10,8 @@ export const authRouter = Router();
  * /auth/register:
  *   post:
  *     summary: Register a new user
+ *     tags:
+ *       - auth
  *     requestBody:
  *       required: true
  *       content:
@@ -61,6 +63,8 @@ authRouter.post(
  * /auth/login:
  *   post:
  *     summary: Login a user
+ *     tags:
+ *       - auth
  *     requestBody:
  *       required: true
  *       content:

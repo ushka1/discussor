@@ -7,6 +7,8 @@ export const serverStatusRouter = Router();
  * /:
  *   get:
  *     summary: Check if the server is up
+ *     tags:
+ *       - server status
  *     responses:
  *       200:
  *         description: The server is up

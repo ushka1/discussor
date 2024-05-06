@@ -10,7 +10,7 @@ export async function getDiscussionByIdHandler(req: Request, res: Response) {
     const id = req.params.id;
 
     if (!isValidObjectId(id)) {
-      return res.status(400).json({ message: 'Invalid discussion ID.' });
+      return res.status(400).json({ message: 'Invalid ID format.' });
     }
 
     const discussion = await DiscussionModel.findById(id, {

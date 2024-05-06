@@ -10,14 +10,120 @@ import { Router } from 'express';
 
 export const discussionRouter = Router();
 
+/**
+ * @openapi
+ * components:
+ *   discussion:
+ *     type: object
+ *     properties:
+ *       _id:
+ *         type: string
+ *       organizer:
+ *         type: object
+ *         properties:
+ *           _id:
+ *             type: string
+ *           username:
+ *             type: string
+ *           email:
+ *             type: string
+ *       title:
+ *         type: string
+ *       description:
+ *         type: string
+ *       tags:
+ *         type: array
+ *         items:
+ *           type: string
+ *       startTime:
+ *         type: string
+ *         format: date-time
+ *       durationInMinutes:
+ *         type: number
+ */
+
+/**
+ * @openapi
+ * /discussions/{id}:
+ *   get:
+ *     summary: Get a discussion by id
+ *     tags:
+ *       - discussions
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: The discussion
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/discussion'
+ *       400:
+ *         description: Invalid ID format
+ *       404:
+ *         description: Discussion not found
+ *       500:
+ *         description: Internal server error
+ */
 discussionRouter.get('/discussions/:id', getDiscussionByIdHandler);
+
+/**
+ * @openapi
+ * /discussions:
+ *   get:
+ *     summary: Get all discussions
+ *     tags:
+ *       - discussions
+ *     responses:
+ *       200:
+ *         description: The list of discussions
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 discussions:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/discussion'
+ *       500:
+ *         description: Internal server error
+ */
 discussionRouter.get('/discussions', getAllDiscussionsHandler);
+
+/**
+ * @openapi
+ * components:
+ *   createDiscussionBody:
+ *     type: object
+ *     properties:
+ *       title:
+ *         type: string
+ *       description:
+ *         type: string
+ *       tags:
+ *         type: array
+ *         items:
+ *           type: string
+ *       startTime:
+ *         type: string
+ *         format: date-time
+ *       durationInMinutes:
+ *         type: number
+ *     required: [title, startTime, durationInMinutes]
+ */
 
 /**
  * @openapi
  * /discussions/create:
  *   post:
  *     summary: Create a new discussion
+ *     tags:
+ *       - discussions
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -25,22 +131,7 @@ discussionRouter.get('/discussions', getAllDiscussionsHandler);
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               title:
- *                 type: string
- *               description:
- *                 type: string
- *               tags:
- *                 type: array
- *                 items:
- *                   type: string
- *               startTime:
- *                 type: string
- *                 format: date-time
- *               durationInMinutes:
- *                 type: number
- *             required: [title, startTime, durationInMinutes]
+ *             $ref: '#/components/createDiscussionBody'
  *     responses:
  *       200:
  *         description: New discussion created successfully

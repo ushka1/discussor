@@ -9,6 +9,8 @@ export const profileRouter = Router();
  * /profile:
  *   get:
  *     summary: Get the user's profile
+ *     tags:
+ *       - profile
  *     security:
  *       - bearerAuth: []
  *     responses:
