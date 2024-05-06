@@ -3,9 +3,9 @@ import {
   getAllDiscussionsHandler,
   getDiscussionByIdHandler,
 } from '@/controllers/discussionController';
-import { authMiddleware } from '@/security/middleware';
+import { securityMiddleware } from '@/security/securityMiddleware';
 import { createDiscussionSchema } from '@/validation/discussionValidation';
-import { validationMiddleware } from '@/validation/middleware';
+import { validationMiddleware } from '@/validation/validationMiddleware';
 import { Router } from 'express';
 
 export const discussionRouter = Router();
@@ -58,7 +58,7 @@ discussionRouter.get('/discussions', getAllDiscussionsHandler);
  */
 discussionRouter.post(
   '/discussions/create',
-  authMiddleware,
+  securityMiddleware,
   validationMiddleware(createDiscussionSchema),
   createDiscussionHandler,
 );

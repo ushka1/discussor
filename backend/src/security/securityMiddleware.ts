@@ -1,12 +1,12 @@
 import { logger } from '@/config/logger';
 import { UserModel } from '@/models/User';
 import { NextFunction, Request, Response } from 'express';
-import { TokenPayload, verifyAccessToken } from './jwt';
+import { TokenPayload, verifyAccessToken } from './tokenUtils';
 
 /**
- * Middleware to authenticate requests using JWT.
+ * Middleware to check if the user is authenticated.
  */
-export async function authMiddleware(
+export async function securityMiddleware(
   req: Request,
   res: Response,
   next: NextFunction,

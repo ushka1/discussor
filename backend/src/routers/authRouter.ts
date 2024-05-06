@@ -1,6 +1,6 @@
 import { loginHandler, registerHandler } from '@/controllers/authController';
 import { loginSchema, registerSchema } from '@/validation/authValidation';
-import { validationMiddleware } from '@/validation/middleware';
+import { validationMiddleware } from '@/validation/validationMiddleware';
 import { Router } from 'express';
 
 export const authRouter = Router();

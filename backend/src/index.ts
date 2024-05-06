@@ -3,11 +3,11 @@ import { setupGracefulShutdown } from './config/gracefulShutdown';
 import { logger } from './config/logger';
 import { connectToMongoDB } from './config/mongodb';
 import { setupSwagger } from './config/swagger';
+import { errorHandler } from './controllers/errorController';
 import { authRouter } from './routers/authRouter';
 import { discussionRouter } from './routers/discussionRouter';
 import { profileRouter } from './routers/profileRouter';
 import { serverStatusRouter } from './routers/serverStatusRouter';
-import { errorHandler } from './security/errorHandler';
 
 const app = express();
 const port = process.env.PORT;

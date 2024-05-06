@@ -1,6 +1,6 @@
 import { logger } from '@/config/logger';
 import { UserModel } from '@/models/User';
-import { generateAccessToken } from '@/security/jwt';
+import { generateAccessToken } from '@/security/tokenUtils';
 import { LoginBody, RegisterBody } from '@/validation/authValidation';
 import bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
