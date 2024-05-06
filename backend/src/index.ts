@@ -23,7 +23,6 @@ setupSwagger(app);
  *         description: The server is up
  */
 app.get('/', (req, res) => {
-  console.log(req.headers);
   res.send('The server is up!');
 });
 

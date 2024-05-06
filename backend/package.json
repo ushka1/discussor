@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-prod": "ts-node -r dotenv/config -r tsconfig-paths/register src/index.ts",
-    "start-dev": "nodemon -r dotenv/config -r tsconfig-paths/register src/index.ts",
-    "dev": "concurrently \"npm:typecheck\" \"npm:start-dev\"",
-    "typecheck": "tsc --noEmit --watch",
-    "lint": "eslint src"
+    "dev": "concurrently \"npm:start-watch\" \"npm:lint-watch\" \"npm:typecheck-watch\"",
+    "start": "ts-node -r dotenv/config -r tsconfig-paths/register src/index.ts",
+    "start-watch": "nodemon --watch src --ext ts --exec \"npm run start\"",
+    "lint": "eslint src",
+    "lint-watch": "nodemon --watch src --ext ts --exec \"npm run lint\"",
+    "typecheck": "tsc --noEmit",
+    "typecheck-watch": "tsc --noEmit --watch"
   },
   "keywords": [],
   "author": "",
