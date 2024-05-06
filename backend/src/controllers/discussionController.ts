@@ -8,7 +8,6 @@ import { ProjectionFields, isValidObjectId } from 'mongoose';
 export async function getDiscussionByIdHandler(req: Request, res: Response) {
   try {
     const id = req.params.id;
-
     if (!isValidObjectId(id)) {
       return res.status(400).json({ message: 'Invalid ID format.' });
     }
@@ -29,7 +28,7 @@ export async function getDiscussionByIdHandler(req: Request, res: Response) {
       return res.status(404).json({ message: 'Discussion not found.' });
     }
 
-    return res.json({ discussion });
+    return res.status(200).json({ discussion });
   } catch (err) {
     logger.error('Error getting discussions.', err);
     return res.status(500).json({ message: 'Internal server error.' });
@@ -53,7 +52,7 @@ export async function getAllDiscussionsHandler(req: Request, res: Response) {
       email: 1,
     } satisfies ProjectionFields<UserDocument>);
 
-    return res.json({ discussions });
+    return res.status(200).json({ discussions });
   } catch (err) {
     logger.error('Error getting discussions.', err);
     return res.status(500).json({ message: 'Internal server error.' });
@@ -78,6 +77,32 @@ export async function createDiscussionHandler(req: Request, res: Response) {
     return res.status(200).json({ discussionId: discussion.id });
   } catch (err) {
     logger.error('Error creating discussion.', err);
+    return res.status(500).json({ message: 'Internal server error.' });
+  }
+}
+
+export async function deleteDiscussionByIdHandler(req: Request, res: Response) {
+  try {
+    const id = req.params.id;
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({ message: 'Invalid ID format.' });
+    }
+
+    const discussion = await DiscussionModel.findById(id);
+    if (!discussion) {
+      return res.status(404).json({ message: 'Discussion not found.' });
+    }
+
+    const userId = req.user!._id;
+    const organizerId = discussion.organizer._id;
+    if (!userId.equals(organizerId)) {
+      return res.status(403).json({ message: 'User is not the organizer.' });
+    }
+
+    await discussion.deleteOne();
+    return res.status(200).json({ message: 'Discussion deleted.' });
+  } catch (err) {
+    logger.error('Error getting discussions.', err);
     return res.status(500).json({ message: 'Internal server error.' });
   }
 }

@@ -1,5 +1,6 @@
 import {
   createDiscussionHandler,
+  deleteDiscussionByIdHandler,
   getAllDiscussionsHandler,
   getDiscussionByIdHandler,
 } from '@/controllers/discussionController';
@@ -152,4 +153,37 @@ discussionRouter.post(
   securityMiddleware,
   validationMiddleware(createDiscussionSchema),
   createDiscussionHandler,
+);
+
+/**
+ * @openapi
+ * /discussions/{id}:
+ *   delete:
+ *     summary: Delete a discussion by id
+ *     tags:
+ *       - discussions
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Discussion deleted successfully
+ *       400:
+ *         description: Invalid ID format
+ *       403:
+ *         description: User is not the organizer
+ *       404:
+ *         description: Discussion not found
+ *       500:
+ *         description: Internal server error
+ */
+discussionRouter.delete(
+  '/discussions/:id',
+  securityMiddleware,
+  deleteDiscussionByIdHandler,
 );
