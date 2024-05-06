@@ -1,18 +1,13 @@
 import { locales } from '@/localization/localeConfig';
-import { MenuItem } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import LocaleSwitcherSelect from './localeSwitcherSelect';
+import LocaleSwitcherMenu from './localeSwitcherMenu';
 
 export default function LocaleSwitcher() {
   const t = useTranslations('LocaleSwitcher');
+  const options = locales.map((l) => ({
+    value: l,
+    label: t('locale', { locale: l }),
+  }));
 
-  return (
-    <LocaleSwitcherSelect label={t('label')}>
-      {locales.map((l) => (
-        <MenuItem key={l} value={l}>
-          {t('locale', { locale: l })}
-        </MenuItem>
-      ))}
-    </LocaleSwitcherSelect>
-  );
+  return <LocaleSwitcherMenu label={t('label')} options={options} />;
 }
