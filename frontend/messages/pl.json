@@ -1,6 +1,7 @@
 {
   "Home": {
-    "title": "Witaj świecie!"
+    "availableDiscussions": "Dostępne dyskusje",
+    "join": "Dołącz"
   },
   "Auth": {
     "loginTitle": "Logowanie",
@@ -17,5 +18,10 @@
   "LocaleSwitcher": {
     "label": "Język",
     "locale": "{locale, select, en {🇺🇸 English} pl {🇵🇱 Polski} other {Nieznany}}"
+  },
+  "AppBar": {
+    "profile": "Profil",
+    "login": "Zaloguj się",
+    "logout": "Wyloguj się"
   }
 }

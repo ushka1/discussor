@@ -11,7 +11,7 @@ export default async function HomePage() {
       <Toolbar />
       <Box>
         <Typography variant='h4' sx={{ my: 4, textAlign: 'center' }}>
-          Available discussions
+          {t('availableDiscussions')}
         </Typography>
       </Box>
       <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
@@ -36,7 +36,7 @@ export default async function HomePage() {
                   disableElevation
                   sx={{ mt: 2, px: 4 }}
                 >
-                  Join
+                  {t('join')}
                 </Button>
               </Paper>
             </Grid>

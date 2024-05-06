@@ -1,6 +1,7 @@
 {
   "Home": {
-    "title": "Hello world!"
+    "availableDiscussions": "Available discussions",
+    "join": "Join"
   },
   "Auth": {
     "loginTitle": "Login form",
@@ -17,5 +18,10 @@
   "LocaleSwitcher": {
     "label": "Language",
     "locale": "{locale, select, en {🇺🇸 English} pl {🇵🇱 Polski} other {Unknown}}"
+  },
+  "AppBar": {
+    "profile": "Profile",
+    "login": "Login",
+    "logout": "Logout"
   }
 }

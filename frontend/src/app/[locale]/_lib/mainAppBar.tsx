@@ -1,11 +1,13 @@
 import { verifySession } from '@/security/sessions';
 import { jaro } from '@/theme/fonts';
 import { AppBar, Box, Button, Link, Toolbar } from '@mui/material';
+import { useTranslations } from 'next-intl';
 import { logout } from '../(auth)/_lib/actions';
 import LocaleSwitcher from './localeSwitcher';
 
 export default function MainAppBar() {
   const isAuth = verifySession();
+  const t = useTranslations('AppBar');
 
   return (
     <AppBar variant='outlined' color='transparent'>
@@ -31,16 +33,16 @@ export default function MainAppBar() {
           <LocaleSwitcher />
           {isAuth ? (
             <>
-              <Button href='/profile'>Profile</Button>
+              <Button href='/profile'>{t('profile')}</Button>
               <form action={logout}>
                 <Button variant='outlined' type='submit'>
-                  Logout
+                  {t('logout')}
                 </Button>
               </form>
             </>
           ) : (
             <Button href='/login' variant='outlined'>
-              Login
+              {t('login')}
             </Button>
           )}
         </Box>
