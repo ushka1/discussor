@@ -1,4 +1,8 @@
-import { createDiscussionHandler } from '@/controllers/discussionController';
+import {
+  createDiscussionHandler,
+  getAllDiscussionsHandler,
+  getDiscussionByIdHandler,
+} from '@/controllers/discussionController';
 import { authMiddleware } from '@/security/middleware';
 import { createDiscussionSchema } from '@/validation/discussionValidation';
 import { validationMiddleware } from '@/validation/middleware';
@@ -6,9 +10,12 @@ import { Router } from 'express';
 
 export const discussionRouter = Router();
 
+discussionRouter.get('/discussions/:id', getDiscussionByIdHandler);
+discussionRouter.get('/discussions', getAllDiscussionsHandler);
+
 /**
  * @openapi
- * /discussion/create:
+ * /discussions/create:
  *   post:
  *     summary: Create a new discussion
  *     security:
@@ -50,7 +57,7 @@ export const discussionRouter = Router();
  *         description: Internal server error
  */
 discussionRouter.post(
-  '/discussion/create',
+  '/discussions/create',
   authMiddleware,
   validationMiddleware(createDiscussionSchema),
   createDiscussionHandler,
