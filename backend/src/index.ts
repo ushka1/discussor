@@ -6,6 +6,7 @@ import { setupSwagger } from './config/swagger';
 import { authRouter } from './routers/authRouter';
 import { discussionRouter } from './routers/discussionRouter';
 import { profileRouter } from './routers/profileRouter';
+import { errorHandler } from './security/errorHandler';
 
 const app = express();
 const port = process.env.PORT;
@@ -30,6 +31,8 @@ app.get('/', (req, res) => {
 app.use(authRouter);
 app.use(profileRouter);
 app.use(discussionRouter);
+
+app.use(errorHandler);
 
 (async () => {
   await connectToMongoDB();
