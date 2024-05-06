@@ -6,6 +6,7 @@ import { setupSwagger } from './config/swagger';
 import { authRouter } from './routers/authRouter';
 import { discussionRouter } from './routers/discussionRouter';
 import { profileRouter } from './routers/profileRouter';
+import { serverStatusRouter } from './routers/serverStatusRouter';
 import { errorHandler } from './security/errorHandler';
 
 const app = express();
@@ -15,19 +16,7 @@ app.use(express.json());
 
 setupSwagger(app);
 
-/**
- * @openapi
- * /:
- *   get:
- *     summary: Check if the server is up
- *     responses:
- *       200:
- *         description: The server is up
- */
-app.get('/', (req, res) => {
-  res.send('The server is up!');
-});
-
+app.use(serverStatusRouter);
 app.use(authRouter);
 app.use(profileRouter);
 app.use(discussionRouter);
