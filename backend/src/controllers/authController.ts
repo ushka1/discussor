@@ -22,7 +22,7 @@ export async function registerHandler(req: Request, res: Response) {
     });
 
     const token = await generateAccessToken({ userId: user.id });
-    res.status(200).json({ token });
+    res.status(200).json(token);
   } catch (err) {
     logger.error('Error registering user.', err);
     res.status(500).json({ message: 'Internal server error.' });
@@ -44,7 +44,7 @@ export async function loginHandler(req: Request, res: Response) {
     }
 
     const token = await generateAccessToken({ userId: user.id });
-    res.status(200).json({ token });
+    res.status(200).json(token);
   } catch (err) {
     logger.error('Error logging in user.', err);
     res.status(500).json({ message: 'Internal server error.' });

@@ -1,4 +1,4 @@
-import { profileHandler } from '@/controllers/profileController';
+import { profileHandler as getProfileHandler } from '@/controllers/profileController';
 import { securityMiddleware } from '@/security/securityMiddleware';
 import { Router } from 'express';
 
@@ -30,4 +30,4 @@ export const profileRouter = Router();
  *       500:
  *         description: Internal server error
  */
-profileRouter.get('/profile', securityMiddleware, profileHandler);
+profileRouter.get('/profile', securityMiddleware, getProfileHandler);

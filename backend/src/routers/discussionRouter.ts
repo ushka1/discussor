@@ -1,8 +1,8 @@
 import {
   createDiscussionHandler,
-  deleteDiscussionByIdHandler,
+  deleteDiscussionByIdHandler as deleteDiscussionHandler,
   getAllDiscussionsHandler,
-  getDiscussionByIdHandler,
+  getDiscussionByIdHandler as getDiscussionHandler,
 } from '@/controllers/discussionController';
 import { securityMiddleware } from '@/security/securityMiddleware';
 import { createDiscussionSchema } from '@/validation/discussionValidation';
@@ -70,7 +70,7 @@ export const discussionRouter = Router();
  *       500:
  *         description: Internal server error
  */
-discussionRouter.get('/discussions/:id', getDiscussionByIdHandler);
+discussionRouter.get('/discussions/:id', getDiscussionHandler);
 
 /**
  * @openapi
@@ -85,12 +85,9 @@ discussionRouter.get('/discussions/:id', getDiscussionByIdHandler);
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 discussions:
- *                   type: array
- *                   items:
- *                     $ref: '#/components/discussion'
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/discussion'
  *       500:
  *         description: Internal server error
  */
@@ -120,7 +117,7 @@ discussionRouter.get('/discussions', getAllDiscussionsHandler);
 
 /**
  * @openapi
- * /discussions/create:
+ * /discussions:
  *   post:
  *     summary: Create a new discussion
  *     tags:
@@ -139,17 +136,15 @@ discussionRouter.get('/discussions', getAllDiscussionsHandler);
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 discussionId:
- *                   type: string
+ *               type: string
+ *               example: 'discussionId'
  *       401:
  *         description: Unauthorized
  *       500:
  *         description: Internal server error
  */
 discussionRouter.post(
-  '/discussions/create',
+  '/discussions',
   securityMiddleware,
   validationMiddleware(createDiscussionSchema),
   createDiscussionHandler,
@@ -185,5 +180,5 @@ discussionRouter.post(
 discussionRouter.delete(
   '/discussions/:id',
   securityMiddleware,
-  deleteDiscussionByIdHandler,
+  deleteDiscussionHandler,
 );

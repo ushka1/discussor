@@ -28,7 +28,7 @@ export async function getDiscussionByIdHandler(req: Request, res: Response) {
       return res.status(404).json({ message: 'Discussion not found.' });
     }
 
-    return res.status(200).json({ discussion });
+    return res.status(200).json(discussion);
   } catch (err) {
     logger.error('Error getting discussions.', err);
     return res.status(500).json({ message: 'Internal server error.' });
@@ -52,7 +52,7 @@ export async function getAllDiscussionsHandler(req: Request, res: Response) {
       email: 1,
     } satisfies ProjectionFields<UserDocument>);
 
-    return res.status(200).json({ discussions });
+    return res.status(200).json(discussions);
   } catch (err) {
     logger.error('Error getting discussions.', err);
     return res.status(500).json({ message: 'Internal server error.' });
@@ -74,7 +74,7 @@ export async function createDiscussionHandler(req: Request, res: Response) {
       durationInMinutes,
     });
 
-    return res.status(200).json({ discussionId: discussion.id });
+    return res.status(200).json(discussion.id);
   } catch (err) {
     logger.error('Error creating discussion.', err);
     return res.status(500).json({ message: 'Internal server error.' });

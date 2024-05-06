@@ -34,19 +34,10 @@ export const authRouter = Router();
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 token:
- *                   type: string
+ *               type: string
+ *               example: 'generatedAccssToken'
  *       400:
- *         description: Invalid username, email, or password
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
+ *         description: Invalid request body
  *       409:
  *         description: Email already in use
  *       500:
@@ -83,10 +74,8 @@ authRouter.post(
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 token:
- *                   type: string
+ *               type: string
+ *               example: 'generatedAccssToken'
  *       401:
  *         description: Invalid email or password
  *       500:
