@@ -18,7 +18,7 @@ export default function AuthLayout({
   const messages = useMessages();
   return (
     <Box
-      component={'main'}
+      component='main'
       sx={{
         height: '100dvh',
         display: 'flex',

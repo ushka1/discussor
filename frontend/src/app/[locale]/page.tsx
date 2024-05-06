@@ -1,6 +1,5 @@
 import {
   Box,
-  Link,
   List,
   ListItem,
   ListItemText,
@@ -8,36 +7,27 @@ import {
   Typography,
 } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
-import { getPostsData, getServerStatus } from './_lib/actions';
-import LocaleSwitcher from './_lib/localeSwitcher';
+import { getDiscussions } from './_lib/actions';
 
 export default async function HomePage() {
   const t = await getTranslations('Home');
-  const posts = await getPostsData();
-  const status = await getServerStatus();
+  const discussions = await getDiscussions();
 
   return (
     <Box component='main'>
       <Toolbar />
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <Typography variant='h2' sx={{ mr: 4 }}>
+      <Box>
+        <Typography variant='h2' sx={{ mt: 8, textAlign: 'center' }}>
           {t('title')}
         </Typography>
-        <Typography variant='h6' sx={{ mr: 4 }}>
-          {status}
-        </Typography>
-        <LocaleSwitcher />
       </Box>
       <List>
-        {posts.map((post: any) => (
-          <ListItem key={post.title}>
-            <ListItemText>{post.title}</ListItemText>
+        {discussions.map((dsc: any) => (
+          <ListItem key={dsc.title}>
+            <ListItemText>{dsc.title}</ListItemText>
           </ListItem>
         ))}
       </List>
-      <Box>
-        <Link href='/profile'>Profile</Link>
-      </Box>
     </Box>
   );
 }
