@@ -3,7 +3,6 @@
 import { usePathname, useRouter } from '@/localization/localizedNavigation';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useLocale } from 'next-intl';
 import { useParams } from 'next/navigation';
@@ -39,13 +38,14 @@ export default function LocaleSwitcherSelect({
   return (
     <Box sx={{ width: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id='locale-switcher-label'>{label}</InputLabel>
+        {/* <InputLabel id='locale-switcher-label'>{label}</InputLabel> */}
         <Select
           labelId='locale-switcher-label'
           id='locale-switcher-select'
           value={locale}
           label={label}
           onChange={changeLocale}
+          variant='standard'
         >
           {children}
         </Select>

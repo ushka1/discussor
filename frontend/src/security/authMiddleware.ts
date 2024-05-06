@@ -18,7 +18,7 @@ export async function authMiddleware(
 
   try {
     const cookie = cookies().get('session')?.value;
-    const session = jwtDecode<{ userId?: string }>(cookie || '');
+    const session = jwtDecode<{ userId?: string }>(cookie ?? '');
     const isAuth = !!session.userId;
 
     if (isAuth) {

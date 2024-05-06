@@ -1,6 +1,6 @@
 'use server';
 
-import { apiClient } from '@/config/axios';
+import { apiClient } from '@/api/axios';
 
 type ProfileData = {
   username: string;

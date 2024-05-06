@@ -4,6 +4,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  Toolbar,
   Typography,
 } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
@@ -16,7 +17,8 @@ export default async function HomePage() {
   const status = await getServerStatus();
 
   return (
-    <main>
+    <Box component='main'>
+      <Toolbar />
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Typography variant='h2' sx={{ mr: 4 }}>
           {t('title')}
@@ -36,6 +38,6 @@ export default async function HomePage() {
       <Box>
         <Link href='/profile'>Profile</Link>
       </Box>
-    </main>
+    </Box>
   );
 }

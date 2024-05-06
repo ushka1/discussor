@@ -1,7 +1,8 @@
-import theme from '@/config/theme';
+import theme from '@/theme/theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import type { Metadata } from 'next';
+import MainAppBar from './_lib/mainAppBar';
 
 export const metadata: Metadata = {
   title: 'Discussor',
@@ -24,6 +25,7 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
+            <MainAppBar />
             {children}
           </ThemeProvider>
         </AppRouterCacheProvider>

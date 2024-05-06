@@ -17,13 +17,22 @@ export default function AuthLayout({
 
   const messages = useMessages();
   return (
-    <Box component={'main'}>
+    <Box
+      component={'main'}
+      sx={{
+        height: '100dvh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+      }}
+    >
       <Paper
+        variant='outlined'
         sx={{
-          maxWidth: 500,
-          mt: 8,
-          mx: 'auto',
-          p: 4,
+          width: 500,
+          px: 6,
+          py: 4,
         }}
       >
         <NextIntlClientProvider messages={pick(messages, 'Auth')}>

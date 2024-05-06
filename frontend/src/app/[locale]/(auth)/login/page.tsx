@@ -41,6 +41,8 @@ export default function LoginPage() {
         required
         label={t('email')}
         sx={{ mt: 4 }}
+        error={!!state?.errors?.email}
+        helperText={state?.errors?.email}
       />
       <TextField
         name='password'
@@ -48,6 +50,8 @@ export default function LoginPage() {
         required
         label={t('password')}
         sx={{ mt: 2 }}
+        error={!!state?.errors?.password}
+        helperText={state?.errors?.password}
         InputProps={{
           endAdornment: (
             <InputAdornment position='end'>

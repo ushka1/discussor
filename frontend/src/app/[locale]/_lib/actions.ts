@@ -1,6 +1,6 @@
 'use server';
 
-import { apiClient } from '@discussor/axios';
+import { apiClient } from '@/api/axios';
 
 export async function getServerStatus() {
   const { data } = await apiClient.get('/');

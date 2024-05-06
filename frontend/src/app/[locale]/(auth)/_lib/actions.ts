@@ -1,8 +1,8 @@
 'use server';
 
+import { apiClient } from '@/api/axios';
 import { redirect } from '@/localization/localizedNavigation';
 import { createSession, deleteSession } from '@/security/sessions';
-import { apiClient } from '@discussor/axios';
 import { LoginFormSchema, RegisterFormSchema } from './definitions';
 
 export async function login(previousState: unknown, formData: FormData) {
@@ -17,13 +17,22 @@ export async function login(previousState: unknown, formData: FormData) {
     };
   }
 
-  const response = await apiClient.post('/auth/login', validatedFields.data);
-  const token = response.data?.token;
+  try {
+    const response = await apiClient.post('/auth/login', validatedFields.data);
+    const token = response.data?.token;
 
-  if (token) {
-    createSession(token);
-    // @ts-ignore
-    redirect('/profile');
+    if (token) {
+      createSession(token);
+      // @ts-ignore
+      redirect('/profile');
+    }
+  } catch {
+    return {
+      errors: {
+        email: 'Invalid credentials.',
+        password: 'Invalid credentials.',
+      },
+    };
   }
 }
 
