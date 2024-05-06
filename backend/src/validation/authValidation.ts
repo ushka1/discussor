@@ -3,12 +3,12 @@ import { joiPasswordExtendCore } from 'joi-password';
 
 const JoiPassword = Joi.extend(joiPasswordExtendCore);
 
-export interface RegisterBody {
+export type RegisterBody = {
   username: string;
   email: string;
   password: string;
   repeatPassword: string;
-}
+};
 
 export const registerSchema = Joi.object({
   username: Joi.string().min(3).max(30).required(),
@@ -27,10 +27,10 @@ export const registerSchema = Joi.object({
   }),
 }).required();
 
-export interface LoginBody {
+export type LoginBody = {
   email: string;
   password: string;
-}
+};
 
 export const loginSchema = Joi.object({
   email: Joi.string().email().required(),

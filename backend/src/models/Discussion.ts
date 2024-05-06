@@ -21,7 +21,7 @@ export class Discussion {
   public title!: string;
 
   @prop({
-    required: true,
+    default: '',
   })
   public description!: string;
 

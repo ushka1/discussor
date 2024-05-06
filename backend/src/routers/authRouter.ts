@@ -1,6 +1,6 @@
 import { loginHandler, registerHandler } from '@/controllers/authController';
 import { loginSchema, registerSchema } from '@/validation/authValidation';
-import { validateRequest } from '@/validation/middleware';
+import { validationMiddleware } from '@/validation/middleware';
 import { Router } from 'express';
 
 export const authRouter = Router();
@@ -25,6 +25,7 @@ export const authRouter = Router();
  *                 type: string
  *               repeatPassword:
  *                 type: string
+ *             required: [username, email, password, repeatPassword]
  *     responses:
  *       200:
  *         description: New user registered successfully
@@ -47,11 +48,11 @@ export const authRouter = Router();
  *       409:
  *         description: Email already in use
  *       500:
- *         description: Internal Server Error
+ *         description: Internal server error
  */
 authRouter.post(
   '/auth/register',
-  validateRequest(registerSchema),
+  validationMiddleware(registerSchema),
   registerHandler,
 );
 
@@ -71,6 +72,7 @@ authRouter.post(
  *                 type: string
  *               password:
  *                 type: string
+ *             required: [email, password]
  *     responses:
  *       200:
  *         description: User logged in successfully
@@ -84,10 +86,10 @@ authRouter.post(
  *       401:
  *         description: Invalid email or password
  *       500:
- *         description: Internal Server Error
+ *         description: Internal server error
  */
 authRouter.post(
   '/auth/login', //
-  validateRequest(loginSchema),
+  validationMiddleware(loginSchema),
   loginHandler,
 );

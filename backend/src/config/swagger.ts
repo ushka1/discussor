@@ -3,13 +3,22 @@ import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUI from 'swagger-ui-express';
 import { logger } from './logger';
 
+/**
+ * @openapi
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ */
 const specs = swaggerJsdoc({
   definition: {
     openapi: '3.0.0',
     info: {
       title: 'Discussor API',
       version: '1.0.0',
-      description: 'A simple Express API with Swagger documentation',
+      description: 'API for Discussor, a discussion platform.',
     },
   },
   apis: ['**/*.ts'],
@@ -25,6 +34,6 @@ export function setupSwagger(app: Express) {
   );
 
   logger.info(
-    `API docs available at http://localhost:${process.env.PORT}/api-docs`,
+    `API docs available at http://localhost:${process.env.PORT}/api-docs.`,
   );
 }

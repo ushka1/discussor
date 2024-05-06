@@ -4,6 +4,7 @@ import { logger } from './config/logger';
 import { connectToMongoDB } from './config/mongodb';
 import { setupSwagger } from './config/swagger';
 import { authRouter } from './routers/authRouter';
+import { discussionRouter } from './routers/discussionRouter';
 import { profileRouter } from './routers/profileRouter';
 
 const app = express();
@@ -28,14 +29,15 @@ app.get('/', (req, res) => {
 
 app.use(authRouter);
 app.use(profileRouter);
+app.use(discussionRouter);
 
 (async () => {
   await connectToMongoDB();
-  logger.info('Connected to MongoDB');
+  logger.info('Connected to MongoDB.');
 
   const server = app.listen(port);
-  logger.info(`Server running on http://localhost:${port}`);
+  logger.info(`Server running on http://localhost:${port}.`);
 
   setupGracefulShutdown(server);
-  logger.info('Graceful shutdown setup');
+  logger.info('Graceful shutdown setup.');
 })();
