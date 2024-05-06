@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Paper, Typography } from '@mui/material';
+import { Avatar, Box, Button, Paper, Toolbar, Typography } from '@mui/material';
 import { logout } from '../(auth)/_lib/actions';
 import { getProfileData } from './actions';
 
@@ -7,7 +7,11 @@ export default async function ProfilePage() {
 
   return (
     <Box component='main'>
-      <Paper sx={{ p: 4, mt: 8, mx: 'auto', maxWidth: 500 }}>
+      <Toolbar />
+      <Paper
+        sx={{ py: 4, mt: 8, mx: 'auto', maxWidth: 500 }}
+        variant='outlined'
+      >
         <Box
           sx={{
             display: 'flex',
@@ -29,12 +33,12 @@ export default async function ProfilePage() {
             mt: 4,
           }}
         >
+          <Button href='/' sx={{ mr: 2 }}>
+            Home
+          </Button>
           <form action={logout}>
             <Button type='submit'>LOGOUT</Button>
           </form>
-          <Button href='/' sx={{ ml: 2 }}>
-            Home
-          </Button>
         </Box>
       </Paper>
     </Box>

@@ -66,7 +66,7 @@ export default function LoginPage() {
           ),
         }}
       />
-      <Button type='submit' variant='contained' sx={{ mt: 4 }}>
+      <Button type='submit' variant='contained' disableElevation sx={{ mt: 4 }}>
         {t('loginButton')}
       </Button>
       <Button href='/register' fullWidth sx={{ mt: 2 }}>
