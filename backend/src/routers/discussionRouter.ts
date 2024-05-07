@@ -49,8 +49,7 @@ export const discussionRouter = Router();
  * /discussions/{id}:
  *   get:
  *     summary: Get a discussion by id
- *     tags:
- *       - discussions
+ *     tags: [discussions]
  *     parameters:
  *       - in: path
  *         name: id
@@ -78,8 +77,7 @@ discussionRouter.get('/discussions/:id', getDiscussionHandler);
  * /discussions:
  *   get:
  *     summary: Get all discussions
- *     tags:
- *       - discussions
+ *     tags: [discussions]
  *     responses:
  *       200:
  *         description: The list of discussions
@@ -121,8 +119,7 @@ discussionRouter.get('/discussions', getAllDiscussionsHandler);
  * /discussions:
  *   post:
  *     summary: Create a new discussion
- *     tags:
- *       - discussions
+ *     tags: [discussions]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -156,8 +153,7 @@ discussionRouter.post(
  * /discussions/{id}:
  *   delete:
  *     summary: Delete a discussion by id
- *     tags:
- *       - discussions
+ *     tags: [discussions]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -189,8 +185,7 @@ discussionRouter.delete(
  * /discussions/{id}/conference-token:
  *   get:
  *     summary: Get a conference token for a discussion
- *     tags:
- *       - discussions
+ *     tags: [discussions]
  *     security:
  *       - bearerAuth: []
  *     parameters:

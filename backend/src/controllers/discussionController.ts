@@ -114,6 +114,7 @@ export async function getDiscussionConferenceToken(
   req: Request,
   res: Response,
 ) {
+  const username = req.user!.username;
   const userId = req.user!.id;
   const discussionId = req.params.id;
 
@@ -123,6 +124,7 @@ export async function getDiscussionConferenceToken(
     process.env.LIVEKIT_API_SECRET,
     {
       identity: userId,
+      name: username,
       ttl: '10m',
     },
   );

@@ -7,11 +7,20 @@ export const authRouter = Router();
 
 /**
  * @openapi
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ */
+
+/**
+ * @openapi
  * /auth/register:
  *   post:
  *     summary: Register a new user
- *     tags:
- *       - auth
+ *     tags: [auth]
  *     requestBody:
  *       required: true
  *       content:
@@ -54,8 +63,7 @@ authRouter.post(
  * /auth/login:
  *   post:
  *     summary: Login a user
- *     tags:
- *       - auth
+ *     tags: [auth]
  *     requestBody:
  *       required: true
  *       content:
