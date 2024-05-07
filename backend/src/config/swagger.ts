@@ -17,11 +17,12 @@ const openapiSpecification = swaggerJsdoc({
       },
     ],
   },
-  apis: ['**/*.ts'],
+  apis: ['./src/**/*.ts', './src/**/*.yaml'],
+  failOnErrors: true,
 });
 
 export function setupSwagger(app: Express) {
-  app.use('/api-docs/swagger.json', (req, res) => {
+  app.get('/api-docs.json', (req, res) => {
     res.json(openapiSpecification);
   });
 

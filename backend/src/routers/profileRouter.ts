@@ -6,6 +6,20 @@ export const profileRouter = Router();
 
 /**
  * @openapi
+ * components:
+ *   schemas:
+ *     Profile:
+ *       type: object
+ *       required: [username, email]
+ *       properties:
+ *         username:
+ *           type: string
+ *         email:
+ *           type: string
+ */
+
+/**
+ * @openapi
  * /profile:
  *   get:
  *     summary: Get the user's profile
@@ -18,12 +32,7 @@ export const profileRouter = Router();
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 username:
- *                   type: string
- *                 email:
- *                   type: string
+ *               $ref: '#/components/schemas/Profile'
  *       401:
  *         description: Unauthorized
  *       500:

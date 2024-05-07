@@ -15,33 +15,36 @@ export const discussionRouter = Router();
 /**
  * @openapi
  * components:
- *   discussion:
- *     type: object
- *     properties:
- *       _id:
- *         type: string
- *       organizer:
- *         type: object
- *         properties:
- *           _id:
- *             type: string
- *           username:
- *             type: string
- *           email:
- *             type: string
- *       title:
- *         type: string
- *       description:
- *         type: string
- *       tags:
- *         type: array
- *         items:
+ *   schemas:
+ *     Discussion:
+ *       type: object
+ *       required: [_id, organizer, title, startTime, durationInMinutes]
+ *       properties:
+ *         _id:
  *           type: string
- *       startTime:
- *         type: string
- *         format: date-time
- *       durationInMinutes:
- *         type: number
+ *         organizer:
+ *           type: object
+ *           required: [_id, username, email]
+ *           properties:
+ *             _id:
+ *               type: string
+ *             username:
+ *               type: string
+ *             email:
+ *               type: string
+ *         title:
+ *           type: string
+ *         description:
+ *           type: string
+ *         tags:
+ *           type: array
+ *           items:
+ *             type: string
+ *         startTime:
+ *           type: string
+ *           format: date-time
+ *         durationInMinutes:
+ *           type: number
  */
 
 /**
@@ -62,7 +65,7 @@ export const discussionRouter = Router();
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/discussion'
+ *               $ref: '#/components/schemas/Discussion'
  *       400:
  *         description: Invalid ID format
  *       404:
@@ -86,7 +89,7 @@ discussionRouter.get('/discussions/:id', getDiscussionHandler);
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/discussion'
+ *                 $ref: '#/components/schemas/Discussion'
  *       500:
  *         description: Internal server error
  */
@@ -95,23 +98,27 @@ discussionRouter.get('/discussions', getAllDiscussionsHandler);
 /**
  * @openapi
  * components:
- *   createDiscussionBody:
- *     type: object
- *     properties:
- *       title:
- *         type: string
- *       description:
- *         type: string
- *       tags:
- *         type: array
- *         items:
- *           type: string
- *       startTime:
- *         type: string
- *         format: date-time
- *       durationInMinutes:
- *         type: number
- *     required: [title, startTime, durationInMinutes]
+ *   requestBodies:
+ *     createDiscussion:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [title, startTime, durationInMinutes]
+ *             properties:
+ *               title:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               tags:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               startTime:
+ *                 type: string
+ *                 format: date-time
+ *               durationInMinutes:
+ *                 type: number
  */
 
 /**
@@ -123,11 +130,7 @@ discussionRouter.get('/discussions', getAllDiscussionsHandler);
  *     security:
  *       - bearerAuth: []
  *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/createDiscussionBody'
+ *       $ref: '#/components/requestBodies/createDiscussion'
  *     responses:
  *       200:
  *         description: New discussion created successfully

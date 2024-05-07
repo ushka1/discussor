@@ -7,16 +7,6 @@ export const authRouter = Router();
 
 /**
  * @openapi
- * components:
- *   securitySchemes:
- *     bearerAuth:
- *       type: http
- *       scheme: bearer
- *       bearerFormat: JWT
- */
-
-/**
- * @openapi
  * /auth/register:
  *   post:
  *     summary: Register a new user
@@ -27,6 +17,7 @@ export const authRouter = Router();
  *         application/json:
  *           schema:
  *             type: object
+ *             required: [username, email, password, repeatPassword]
  *             properties:
  *               username:
  *                 type: string
@@ -36,7 +27,6 @@ export const authRouter = Router();
  *                 type: string
  *               repeatPassword:
  *                 type: string
- *             required: [username, email, password, repeatPassword]
  *     responses:
  *       200:
  *         description: New user registered successfully
@@ -70,12 +60,12 @@ authRouter.post(
  *         application/json:
  *           schema:
  *             type: object
+ *             required: [email, password]
  *             properties:
  *               email:
  *                 type: string
  *               password:
  *                 type: string
- *             required: [email, password]
  *     responses:
  *       200:
  *         description: User logged in successfully
