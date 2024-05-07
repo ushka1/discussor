@@ -28,7 +28,9 @@ export function verifySession() {
     }
 
     return true;
-  } catch {
+  } catch (err) {
+    console.log(err);
+
     deleteSession();
     return false;
   }

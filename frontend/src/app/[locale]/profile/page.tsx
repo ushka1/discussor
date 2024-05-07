@@ -1,4 +1,5 @@
-import { Avatar, Box, Button, Paper, Toolbar, Typography } from '@mui/material';
+import { Avatar, Box, Button, Paper, Typography } from '@mui/material';
+import bg from '@public/background.jpg';
 import { logout } from '../(auth)/_lib/actions';
 import { getProfileData } from './actions';
 
@@ -6,11 +7,27 @@ export default async function ProfilePage() {
   const profileData = await getProfileData();
 
   return (
-    <Box component='main'>
-      <Toolbar />
+    <Box
+      component='main'
+      sx={{
+        height: '100dvh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+        backgroundImage: `url(${bg.src})`,
+        backgroundSize: 'cover',
+      }}
+    >
       <Paper
-        sx={{ py: 4, mt: 8, mx: 'auto', maxWidth: 500 }}
-        variant='outlined'
+        elevation={4}
+        sx={{
+          width: 500,
+          px: 6,
+          py: 4,
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          backdropFilter: 'blur(8px)',
+        }}
       >
         <Box
           sx={{

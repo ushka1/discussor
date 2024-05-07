@@ -10,7 +10,13 @@ export default function MainAppBar() {
   const t = useTranslations('AppBar');
 
   return (
-    <AppBar variant='outlined' color='transparent'>
+    <AppBar
+      variant='outlined'
+      sx={{
+        backdropFilter: 'blur(8px)',
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+      }}
+    >
       <Toolbar>
         <Link
           href='/'

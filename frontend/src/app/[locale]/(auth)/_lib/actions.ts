@@ -1,8 +1,8 @@
 'use server';
 
 import { apiClient } from '@/api/axios';
-import { redirect } from '@/localization/localizedNavigation';
 import { createSession, deleteSession } from '@/security/sessions';
+import { redirect } from '@discussor/navigation';
 import { LoginFormSchema, RegisterFormSchema } from './definitions';
 
 export async function login(previousState: unknown, formData: FormData) {
@@ -20,13 +20,9 @@ export async function login(previousState: unknown, formData: FormData) {
   try {
     const response = await apiClient.post('/auth/login', validatedFields.data);
     const token = response.data;
-
-    if (token) {
-      createSession(token);
-      // @ts-ignore
-      redirect('/profile');
-    }
-  } catch {
+    createSession(token);
+  } catch (err) {
+    console.log(err);
     return {
       errors: {
         email: 'Invalid credentials.',
@@ -34,6 +30,9 @@ export async function login(previousState: unknown, formData: FormData) {
       },
     };
   }
+
+  // @ts-ignore
+  redirect('/profile');
 }
 
 export async function register(previousState: unknown, formData: FormData) {

@@ -26,7 +26,8 @@ export async function authMiddleware(
     } else {
       return onFailure(req);
     }
-  } catch {
+  } catch (err) {
+    console.log(err);
     return onFailure(req);
   }
 }

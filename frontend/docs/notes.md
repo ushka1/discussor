@@ -13,3 +13,5 @@
 1. If you want to use translations in client environment, then just use `<NextIntlClientProvider>` and be good man.
 
 1. `use server` vs `import 'server only'` <https://www.reddit.com/r/nextjs/comments/18ih6nd/useserver_vs_serveronly/>.
+
+1. `redirect` internally throws an error so it should be called outside of `try/catch` blocks.

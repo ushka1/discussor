@@ -5,8 +5,8 @@ import { authMiddleware } from './security/authMiddleware';
 export default function middleware(req: NextRequest) {
   return authMiddleware(
     req,
-    (r) => intlMiddleware(r),
-    (r) => NextResponse.redirect(new URL('/login', r.nextUrl)),
+    () => intlMiddleware(req),
+    () => NextResponse.redirect(new URL('/login', req.nextUrl)),
   );
 }
 
