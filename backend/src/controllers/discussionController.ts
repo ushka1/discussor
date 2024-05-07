@@ -5,6 +5,9 @@ import { CreateDiscussionBody } from '@/validation/discussionValidation';
 import { Request, Response } from 'express';
 import { ProjectionFields, isValidObjectId } from 'mongoose';
 
+// Dynamic import usage because of LiveKitServerSDK being an ESM module.
+const livekitServerSdk = import('livekit-server-sdk');
+
 export async function getDiscussionByIdHandler(req: Request, res: Response) {
   try {
     const id = req.params.id;
@@ -105,4 +108,29 @@ export async function deleteDiscussionByIdHandler(req: Request, res: Response) {
     logger.error('Error getting discussions.', err);
     return res.status(500).json({ message: 'Internal server error.' });
   }
+}
+
+export async function getDiscussionConferenceToken(
+  req: Request,
+  res: Response,
+) {
+  const userId = req.user!.id;
+  const discussionId = req.params.id;
+
+  const { AccessToken } = await livekitServerSdk;
+  const token = new AccessToken(
+    process.env.LIVEKIT_API_KEY,
+    process.env.LIVEKIT_API_SECRET,
+    {
+      identity: userId,
+      ttl: '10m',
+    },
+  );
+  token.addGrant({
+    room: discussionId,
+    roomJoin: true,
+  });
+
+  const jwt = await token.toJwt();
+  return res.json(jwt);
 }

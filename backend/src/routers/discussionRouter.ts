@@ -2,6 +2,7 @@ import {
   createDiscussionHandler,
   deleteDiscussionByIdHandler as deleteDiscussionHandler,
   getAllDiscussionsHandler,
+  getDiscussionConferenceToken,
   getDiscussionByIdHandler as getDiscussionHandler,
 } from '@/controllers/discussionController';
 import { securityMiddleware } from '@/security/securityMiddleware';
@@ -181,4 +182,38 @@ discussionRouter.delete(
   '/discussions/:id',
   securityMiddleware,
   deleteDiscussionHandler,
+);
+
+/**
+ * @openapi
+ * /discussions/{id}/conference-token:
+ *   get:
+ *     summary: Get a conference token for a discussion
+ *     tags:
+ *       - discussions
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: The conference token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *               example: 'conferenceToken'
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Internal server error
+ */
+discussionRouter.get(
+  '/discussions/:id/conference-token',
+  securityMiddleware,
+  getDiscussionConferenceToken,
 );

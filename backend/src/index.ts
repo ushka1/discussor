@@ -5,7 +5,6 @@ import { connectToMongoDB } from './config/mongodb';
 import { setupSwagger } from './config/swagger';
 import { errorHandler } from './controllers/errorController';
 import { authRouter } from './routers/authRouter';
-import { conferenceRouter } from './routers/conferenceRouter';
 import { discussionRouter } from './routers/discussionRouter';
 import { profileRouter } from './routers/profileRouter';
 import { serverStatusRouter } from './routers/serverStatusRouter';
@@ -21,7 +20,6 @@ app.use(serverStatusRouter);
 app.use(authRouter);
 app.use(profileRouter);
 app.use(discussionRouter);
-app.use(conferenceRouter);
 
 app.use(errorHandler);
 
