@@ -20,3 +20,10 @@ export async function getDiscussion(discussionId: string) {
   );
   return response.data;
 }
+
+export async function getDiscussionConferenceToken(discussionId: string) {
+  const response = await apiClient.get<string>(
+    `/discussions/${discussionId}/conference-token`,
+  );
+  return response.data;
+}

@@ -1,3 +1,4 @@
+import { verifySession } from '@/security/sessions';
 import {
   Box,
   Button,
@@ -12,6 +13,7 @@ import { getDiscussions } from './_lib/actions';
 
 export default async function HomePage() {
   const t = await getTranslations('Home');
+  const isAuth = verifySession();
   const discussions = await getDiscussions();
 
   return (
@@ -72,6 +74,7 @@ export default async function HomePage() {
                   variant='contained'
                   color='success'
                   disableElevation
+                  disabled={!isAuth}
                   sx={{ mt: 2, px: 6 }}
                 >
                   {t('join')}
