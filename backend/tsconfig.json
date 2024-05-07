@@ -11,15 +11,15 @@
 
     "compilerOptions": {
       // compilerOptions specified here will override those declared below,
-      // but *only* in ts-node.  Useful if you want ts-node and tsc to use
+      // but *only* in ts-node. Useful if you want ts-node and tsc to use
       // different options with a single tsconfig.json.
     }
   },
 
   "compilerOptions": {
-    "pretty": true, // use pretty error messages
-    "experimentalDecorators": true, // required by Typegoose
-    "emitDecoratorMetadata": true, // required by Typegoose
+    "pretty": true, // Use pretty error messages.
+    "experimentalDecorators": true, // Required by Typegoose.
+    "emitDecoratorMetadata": true, // Required by Typegoose.
     "paths": {
       "@/*": ["./src/*"]
     }

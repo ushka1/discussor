@@ -7,8 +7,6 @@ import {
 import { Discussion } from './Discussion';
 
 export class User {
-  // Data
-
   @prop({
     required: true,
     minlength: 3,
@@ -27,8 +25,6 @@ export class User {
     required: true,
   })
   public password!: string;
-
-  // Sockets
 
   @prop()
   public socketId?: string;
