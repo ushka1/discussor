@@ -1,20 +1,10 @@
 'use server';
 
 import { apiClient } from '@/api/axios';
+import { paths } from '@/api/openapi';
 
-type DiscussionsData = {
-  _id: 'string';
-  organizer: {
-    _id: 'string';
-    username: 'string';
-    email: 'string';
-  };
-  title: 'string';
-  description: 'string';
-  tags: ['string'];
-  startTime: '2024-05-06T18:45:35.497Z';
-  durationInMinutes: 0;
-}[];
+type DiscussionsData =
+  paths['/discussions']['get']['responses']['200']['content']['application/json'];
 
 export async function getDiscussions() {
   const response = await apiClient.get<DiscussionsData>('/discussions');

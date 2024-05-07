@@ -50,7 +50,7 @@ export default async function HomePage() {
                     mt: 2,
                   }}
                 >
-                  {dsc.tags.map((tag) => (
+                  {dsc.tags?.map((tag) => (
                     <Chip
                       key={tag}
                       label={tag}

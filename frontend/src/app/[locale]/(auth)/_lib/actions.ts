@@ -18,7 +18,10 @@ export async function login(previousState: unknown, formData: FormData) {
   }
 
   try {
-    const response = await apiClient.post('/auth/login', validatedFields.data);
+    const response = await apiClient.post<string>(
+      '/auth/login',
+      validatedFields.data,
+    );
     const token = response.data;
     createSession(token);
   } catch (err) {
@@ -49,7 +52,10 @@ export async function register(previousState: unknown, formData: FormData) {
     };
   }
 
-  const response = await apiClient.post('/auth/register', validatedFields.data);
+  const response = await apiClient.post<string>(
+    '/auth/register',
+    validatedFields.data,
+  );
   const token = response.data;
 
   if (token) {
