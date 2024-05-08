@@ -27,8 +27,6 @@ export default function Conference({ conferenceToken }: Readonly<Props>) {
       serverUrl={process.env.NEXT_PUBLIC_LK_SERVER_URL}
       data-lk-theme='default'
       style={{
-        display: 'flex',
-        flexDirection: 'column',
         background: 'transparent',
       }}
       onDisconnected={() => {
