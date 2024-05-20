@@ -1,7 +1,12 @@
-import { Avatar, Box, Button, Paper, Typography } from '@mui/material';
+import { Person } from '@mui/icons-material';
+import { Avatar, Box, Button, Paper, Toolbar, Typography } from '@mui/material';
 import bg from '@public/background.jpg';
 import { logout } from '../(auth)/_lib/actions';
 import { getProfileData } from './actions';
+import ProfileDrawer from './profileDrawer';
+
+const drawerWidth = 240;
+const appBarZIndex = 1100;
 
 export default async function ProfilePage() {
   const profileData = await getProfileData();
@@ -10,54 +15,77 @@ export default async function ProfilePage() {
     <Box
       component='main'
       sx={{
-        height: '100dvh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
+        minHeight: '100dvh',
         backgroundImage: `url(${bg.src})`,
+        backgroundAttachment: 'fixed',
         backgroundSize: 'cover',
+        zIndex: appBarZIndex - 1,
       }}
     >
-      <Paper
-        elevation={4}
+      <ProfileDrawer />
+      <Box
         sx={{
-          width: 500,
-          px: 6,
-          py: 4,
-          backgroundColor: 'rgba(255, 255, 255, 0.8)',
-          backdropFilter: 'blur(8px)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          width: {
+            md: `calc(100% - ${drawerWidth}px)`,
+          },
+          ml: {
+            md: `${drawerWidth}px`,
+          },
         }}
       >
-        <Box
+        <Toolbar />
+        <Paper
+          elevation={4}
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            px: 6,
+            py: 4,
+            mt: 16,
+            width: 500,
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            backdropFilter: 'blur(8px)',
           }}
         >
-          <Avatar>{profileData.username[0]}</Avatar>
-          <Box sx={{ ml: 2 }}>
-            <Typography>Username: {profileData.username}</Typography>
-            <Typography>Email: {profileData.email}</Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'column',
+            }}
+          >
+            <Avatar sx={{ width: 80, height: 80 }}>
+              <Person
+                sx={{
+                  width: '75%',
+                  height: '75%',
+                }}
+              />
+            </Avatar>
+            <Typography variant='h5' sx={{ mt: 2 }}>
+              {profileData.username}
+            </Typography>
+            <Typography>{profileData.email}</Typography>
           </Box>
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            mt: 4,
-          }}
-        >
-          <Button href='/' sx={{ mr: 2 }}>
-            Home
-          </Button>
-          <form action={logout}>
-            <Button type='submit'>LOGOUT</Button>
-          </form>
-        </Box>
-      </Paper>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              mt: 4,
+            }}
+          >
+            <Button href='/' sx={{ mr: 2 }}>
+              Home
+            </Button>
+            <form action={logout}>
+              <Button type='submit'>LOGOUT</Button>
+            </form>
+          </Box>
+        </Paper>
+      </Box>
     </Box>
   );
 }
