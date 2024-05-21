@@ -11,6 +11,7 @@ import {
 } from '@livekit/components-react';
 import '@livekit/components-styles';
 import { Track } from 'livekit-client';
+import './participantMediaVideo.css';
 
 type Props = {
   conferenceToken: string;
@@ -27,6 +28,8 @@ export default function Conference({ conferenceToken }: Readonly<Props>) {
       serverUrl={process.env.NEXT_PUBLIC_LK_SERVER_URL}
       data-lk-theme='default'
       style={{
+        display: 'flex',
+        flexDirection: 'column',
         background: 'transparent',
       }}
       onDisconnected={() => {
@@ -51,7 +54,7 @@ function MyVideoConference() {
   );
 
   return (
-    <GridLayout tracks={tracks}>
+    <GridLayout tracks={tracks} style={{ minHeight: 0, gap: '24px' }}>
       <ParticipantTile />
     </GridLayout>
   );

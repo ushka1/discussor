@@ -1,5 +1,3 @@
-'use client';
-
 import {
   Message,
   Person,
@@ -16,48 +14,24 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
-  styled,
 } from '@mui/material';
-import { useState } from 'react';
 
-const drawerWidth = 240;
-const appBarZIndex = 1100;
+type Props = {
+  drawerWidth: number;
+  appBarZIndex: number;
+};
 
-const StyledDrawer = styled(Drawer)(({ theme }) => ({
-  '& .MuiDrawer-paper': {
-    width: drawerWidth,
-    boxSizing: 'border-box',
-    background: 'transparent',
-    borderRight: 'none',
-  },
-}));
-
-export default function ProfileDrawer() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
-
-  const handleDrawerClose = () => {
-    setIsClosing(true);
-    setMobileOpen(false);
-  };
-
-  const handleDrawerTransitionEnd = () => {
-    setIsClosing(false);
-  };
-
-  const handleDrawerToggle = () => {
-    if (!isClosing) {
-      setMobileOpen(!mobileOpen);
-    }
-  };
-
+export default function ProfileDrawer({
+  appBarZIndex,
+  drawerWidth,
+}: Readonly<Props>) {
   return (
     <Drawer
       open
       variant='permanent'
       sx={{
         '& .MuiDrawer-paper': {
-          display: 'flex',
+          display: { xs: 'none', md: 'flex' },
           height: '100%',
           width: drawerWidth,
           zIndex: appBarZIndex - 1,

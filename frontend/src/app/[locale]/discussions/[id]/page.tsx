@@ -14,17 +14,19 @@ export default async function Page({ params }: Readonly<Props>) {
     <Box
       component='main'
       sx={{
+        display: 'flex',
+        flexDirection: 'column',
         height: '100dvh',
       }}
     >
       <Toolbar />
-      {/* <Typography variant='h4' sx={{ mt: 4, textAlign: 'center' }}>
-        {discussion.title}
-      </Typography>
-      <Typography sx={{ mt: 2, textAlign: 'center' }}>
-        {discussion.description}
-      </Typography> */}
-      <Box sx={{ p: 4 }}>
+      <Box
+        sx={{
+          p: 4,
+          flexGrow: 1,
+          minHeight: 0,
+        }}
+      >
         <Conference conferenceToken={conferenceToken} />
       </Box>
     </Box>
