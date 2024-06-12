@@ -28,7 +28,7 @@ export const config = {
      */
     {
       source:
-        '/((?!api|_next/static|_next/image|favicon.ico|robots.txt|.*\\.png$|.*\\.jpg$|.*\\.svg$).*)',
+        '/((?!api|_next/static|_next/image|favicon.ico|robots.txt|manifest.json|.*\\.png$|.*\\.jpg$|.*\\.svg$).*)',
       // missing: [{ type: 'header', key: 'next-action' }],
     },
   ],

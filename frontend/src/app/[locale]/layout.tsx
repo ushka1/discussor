@@ -9,7 +9,9 @@ export const metadata: Metadata = {
   description: 'Bringing people together to discuss and share ideas!',
   icons: {
     icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   },
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
